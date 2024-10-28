@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:06:49 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/28 22:17:52 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/29 01:13:46 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	not_cub_extention(char *str)
 	}
 }
 
-void	parsing(int ac, char **av)
+t_game	parsing(t_game game, int ac, char **av)
 {
 	int		i;
 	int		fd;
@@ -61,9 +61,9 @@ void	parsing(int ac, char **av)
 			perror("Error opening a file");
 			exit(1);
 		}
-		//map_file_parsing(fd);
+		game = map_file_parsing(game, fd);
 		close(fd);
 	}
 	not_cub_extention(av[1]);
-	return ;
+	return (game);
 }
