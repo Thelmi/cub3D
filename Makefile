@@ -2,7 +2,7 @@ NAME = cub3D
 
 MINILBX = minilibx/libmlx.a
 
-SRC = main.c
+SRC = main.c parsing/parsing.c minilibft/string_functions.c
 
 OBJ := $(SRC:.c=.o)
 
