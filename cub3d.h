@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 03:26:40 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/29 10:46:20 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,10 @@ int			t_strncmp(char *s1, char *s2, size_t n);
 size_t		t_strlen(char *str);
 size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
 t_game		textures_parsing(char *line, t_game game, int fd);
-t_game		map_parsing(t_game game, int fd);
+void		assigning_texture(char *line, char **texture, int fd, t_game game);
+char		*ft_strdup(char *s1);
+void		free_textures(t_game game);
+//t_game		assigning_fl(char *line, t_game game, int fd);
+//t_game		assigning_cl(char *line, t_game game, int fd);
+//t_game		map_parsing(t_game game, int fd);
 #endif

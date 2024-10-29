@@ -2,11 +2,12 @@ NAME = cub3D
 
 MINILBX = minilibx/libmlx.a
 
-SRC = main.c parsing/parsing.c parsing/map_file_parsing.c minilibft/string_functions.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = main.c parsing/parsing.c parsing/map_file_parsing.c parsing/textures_parsing.c minilibft/string_functions.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 OBJ := $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -Iminilibx
+#CFLAGS = -Wall -Wextra -Werror -Iminilibx -g3 -fsanitize=address
+CFLAGS = -Iminilibx -g3 -fsanitize=address
 
 all: $(NAME)
 
@@ -14,7 +15,7 @@ all: $(NAME)
 	cc $(CFLAGS) -c $< -o $@
 
 $(NAME): $(MINILBX) $(OBJ)
-	cc $(OBJ) -Lminilibx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	cc $(OBJ) -Lminilibx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(CFLAGS)
 
 $(MINILBX):
 	make -C ./minilibx

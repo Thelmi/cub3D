@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:49:16 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 01:08:25 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/29 11:14:26 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int	main(int ac, char **av)
 
 	game_init(&game);
 	game = parsing(game, ac, av);
+	print_texture(game);
 	return (0);
 }
