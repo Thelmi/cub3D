@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:49:16 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 11:14:26 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/30 03:09:21 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ void	game_init(t_game *game)
 	game->so = NULL;
 	game->we = NULL;
 	game->ea = NULL;
-	game->flr_r = 0;
-	game->flr_g = 0;
-	game->flr_b = 0;
-	game->cl_r = 0;
-	game->cl_g = 0;
-	game->cl_b = 0;
+	game->flr_r = -1;
+	game->flr_g = -1;
+	game->flr_b = -1;
+	game->cl_r = -1;
+	game->cl_g = -1;
+	game->cl_b = -1;
+	game->floor_hex = 0;
+	game->ceil_hex = 0;
 }
 
 int	main(int ac, char **av)
@@ -33,6 +35,5 @@ int	main(int ac, char **av)
 
 	game_init(&game);
 	game = parsing(game, ac, av);
-	print_texture(game);
 	return (0);
 }

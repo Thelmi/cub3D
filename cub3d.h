@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 10:46:20 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/30 03:08:10 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ typedef struct s_game
 	char	*so;
 	char	*we;
 	char	*ea;
+	int		floor_hex;
 	int		flr_r;
 	int		flr_g;
 	int		flr_b;
+	int		ceil_hex;
 	int		cl_r;
 	int		cl_g;
 	int		cl_b;
@@ -40,10 +42,17 @@ int			t_strncmp(char *s1, char *s2, size_t n);
 size_t		t_strlen(char *str);
 size_t		ft_strlcpy(char *dst, char *src, size_t dstsize);
 t_game		textures_parsing(char *line, t_game game, int fd);
-void		assigning_texture(char *line, char **texture, int fd, t_game game);
 char		*ft_strdup(char *s1);
 void		free_textures(t_game game);
-//t_game		assigning_fl(char *line, t_game game, int fd);
-//t_game		assigning_cl(char *line, t_game game, int fd);
-//t_game		map_parsing(t_game game, int fd);
+t_game		assigning_floor_color(char *line, t_game game, int fd);
+int			ft_isdigit(int c);
+t_game		parse_rgb(char *line, t_game game, int fd);
+int			ft_atoi(char *str);
+int			invalid_rgb(char *line, t_game game, int fd);
+void		check_last_characters(char *line, t_game game, int fd, int i);
+t_game		assigning_fl_rgb(t_game game, int *values);
+int			parse_single_value(char *line, int *i, t_game game, int fd);
+int			commas_couter(char *line, t_game game, int fd);
+int			is_valid_char(char c);
+//t_game	map_parsing(t_game game, int fd);
 #endif
