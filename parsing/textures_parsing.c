@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 03:41:23 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/30 02:58:00 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:41:22 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_game	textures_parsing(char *line, t_game game, int fd)
 	else if (line[0] == 'F' && line [1] == ' ')
 		game = assigning_floor_color(line, game, fd);
 	else if (line[0] == 'C' && line [1] == ' ')
-		printf("hello\n"); //assigning_ceil_color(line, game, fd);
+		game = assigning_ceil_color(line, game, fd);
 	else
 	{
 		free_textures(game);

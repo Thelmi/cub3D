@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/30 03:08:10 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:34:06 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 # include "./get_next_line/get_next_line.h"
 
 typedef struct s_game
@@ -54,5 +55,6 @@ t_game		assigning_fl_rgb(t_game game, int *values);
 int			parse_single_value(char *line, int *i, t_game game, int fd);
 int			commas_couter(char *line, t_game game, int fd);
 int			is_valid_char(char c);
+t_game		assigning_ceil_color(char *line, t_game game, int fd);
 //t_game	map_parsing(t_game game, int fd);
 #endif

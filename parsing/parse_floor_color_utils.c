@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:41:49 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/30 03:08:42 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:57:38 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_game	assigning_fl_rgb(t_game game, int *values)
 	game.flr_r = values[0];
 	game.flr_g = values[1];
 	game.flr_b = values[2];
+	game.floor_hex = game.flr_r * pow(256, 2)
+		+ (game.flr_g * 256) + game.flr_b;
 	return (game);
 }
 
