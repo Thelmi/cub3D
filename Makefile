@@ -5,6 +5,7 @@ MINILBX = minilibx/libmlx.a
 SRC = main.c parsing/parsing.c parsing/map_file_parsing.c parsing/textures_parsing.c parsing/parse_floor_color.c \
 		parsing/parse_floor_color_utils.c minilibft/string_functions.c get_next_line/get_next_line.c minilibft/string_functions_two.c \
 		get_next_line/get_next_line_utils.c parsing/parse_ceil_color.c \
+		parsing/map_parsing.c
 
 OBJ := $(SRC:.c=.o)
 
