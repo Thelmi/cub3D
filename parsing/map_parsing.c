@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:23:17 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 07:27:27 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/01 09:43:37 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,16 @@ t_game	map_parsing(t_game game, int fd)
 {
 	char	*read;
 	char	*read_next;
+	char	**str;
 
 	read = get_next_line(fd);
 	read = nl_escaper(read, game, fd);
 	valid_all_ones(read, game, fd);
 	read = read_map_free(read, game, fd);
+	str = ft_split(read, '\n');
+	game = locate_check_players(str, game, fd, read);
+	game.map = str;
+	game.copy = ft_split(read, '\n');
+	free(read);
 	return (game);
 }
