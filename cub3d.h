@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 02:27:53 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/01 07:08:59 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ typedef struct s_game
 	int		cl_r;
 	int		cl_g;
 	int		cl_b;
+	int		p_flg;
 }			t_game;
 
-t_game	map_parsing(t_game game, int fd);
+char		*t_strjoin(char *s1, char *s2);
+t_game		map_parsing(t_game game, int fd);
 t_game		parsing(t_game game, int ac, char **av);
 t_game		map_file_parsing(t_game game, int fd);
 int			t_strncmp(char *s1, char *s2, size_t n);
@@ -57,5 +59,6 @@ int			parse_single_value(char *line, int *i, t_game game, int fd);
 int			commas_couter(char *line, t_game game, int fd);
 int			is_valid_char(char c);
 t_game		assigning_ceil_color(char *line, t_game game, int fd);
-//t_game	map_parsing(t_game game, int fd);
+void		letters_checker(char *read_next, char *read, t_game game, int fd);
+void		valid_all_ones(char *read, t_game game, int fd);
 #endif

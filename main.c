@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:49:16 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/30 14:58:52 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/01 05:51:39 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	game_init(t_game *game)
 	game->cl_b = -1;
 	game->floor_hex = 0;
 	game->ceil_hex = 0;
+	game->p_flg = 0;
 }
 
 int	main(int ac, char **av)
