@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 03:41:23 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 11:12:07 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/30 14:41:22 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	free_textures(t_game game)
 		free(game.ea);
 }
 
-void	assigning_texture(char *line, char **texture, int fd, t_game game)
+static void	assigning_texture(char *line, char **texture, int fd, t_game game)
 {
 	int	i;
 
 	i = 2;
-	while (line[i] == ' ')
+	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	if (*texture == NULL)
 	{
@@ -53,7 +53,6 @@ void	assigning_texture(char *line, char **texture, int fd, t_game game)
 
 t_game	textures_parsing(char *line, t_game game, int fd)
 {
-	//printf("line = (%s)\n\n", line);
 	if (line[0] == 'N' && line[1] == 'O' && line [2] == ' ')
 		assigning_texture(line, &(game.no), fd, game);
 	else if (line[0] == 'S' && line[1] == 'O' && line [2] == ' ')
@@ -63,15 +62,9 @@ t_game	textures_parsing(char *line, t_game game, int fd)
 	else if (line[0] == 'E' && line[1] == 'A' && line [2] == ' ')
 		assigning_texture(line, &(game.ea), fd, game);
 	else if (line[0] == 'F' && line [1] == ' ')
-	{
-		printf("hello\n");
-		//assigning_floor_color(line, game, fd);
-	}
+		game = assigning_floor_color(line, game, fd);
 	else if (line[0] == 'C' && line [1] == ' ')
-	{
-		printf("how are u\n");
-		//assigning_ceil_color(line, game, fd);
-	}
+		game = assigning_ceil_color(line, game, fd);
 	else
 	{
 		free_textures(game);

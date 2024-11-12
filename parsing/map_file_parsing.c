@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:04:48 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 11:05:33 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/01 03:04:09 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ t_game	map_file_parsing(t_game game, int fd)
 			break ;
 		line = get_next_line(fd);
 	}
-	if (count != 6)
+	if (count != 6 || game.floor_hex == game.ceil_hex)
 	{
-		printf("%d\n", count);
 		free(line);
 		free_textures(game);
 		(close(fd), printf("Error! check the map textures again\n"), exit(1));
 	}
+	map_parsing(game, fd);
 	return (game);
 }

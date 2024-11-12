@@ -6,11 +6,18 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:30:13 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 11:04:44 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/29 23:26:04 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
 
 size_t	t_strlen(char *str)
 {
