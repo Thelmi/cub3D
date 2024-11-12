@@ -6,11 +6,18 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:30:13 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 02:37:04 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/10/29 23:26:04 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
 
 size_t	t_strlen(char *str)
 {
@@ -50,4 +57,15 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 	}
 	dst[i] = '\0';
 	return (t_strlen(src));
+}
+
+char	*ft_strdup(char *s1)
+{
+	int		i;
+	char	*s2;
+
+	i = t_strlen(s1) + 1;
+	s2 = malloc(sizeof(char) * i);
+	ft_strlcpy(s2, s1, i);
+	return (s2);
 }
