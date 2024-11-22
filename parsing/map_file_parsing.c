@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:04:48 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 03:04:09 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/22 12:17:51 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ t_game	map_file_parsing(t_game game, int fd)
 		free_textures(game);
 		(close(fd), printf("Error! check the map textures again\n"), exit(1));
 	}
-	map_parsing(game, fd);
+	game = map_parsing(game, fd);
 	return (game);
 }
