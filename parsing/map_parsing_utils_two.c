@@ -6,18 +6,31 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 08:42:57 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 10:08:44 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:40:07 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	free_map(t_game game)
+{
+	int	i;
+
+	i = 0;
+	if (game.map[i])
+	{
+		while (game.map[i])
+			free(game.map[i++]);
+		free(game.map);
+	}
+}
 
 void	free_and_exit(char **str, int fd, t_game game, char *read)
 {
 	int	i;
 
 	i = 0;
-	printf("Error, more than one player\n");
+	printf("Error, You must have one player\n");
 	if (str)
 	{
 		while (str[i])
@@ -38,8 +51,6 @@ static int	is_pl_view(char c, t_game *game, int i, int j)
 	{
 		game->pl_x = j;
 		game->pl_y = i;
-		printf("%d\n", game->pl_y);
-		printf("%d\n", game->pl_x);
 	}
 	return (c == 'N' || c == 'W' || c == 'E' || c == 'S');
 }
@@ -68,7 +79,7 @@ t_game	locate_check_players(char **arr, t_game game, int fd, char *read)
 			j++;
 		}
 	}
-	if (count > 1)
+	if (count != 1)
 		free_and_exit(arr, fd, game, read);
 	return (game);
 }

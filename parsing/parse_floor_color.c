@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 01:59:47 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 01:08:16 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/26 16:06:50 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	invalid_rgb(char *line, t_game game, int fd)
 {
-	//if (line)
-	//	free(line);
+	(void)line;
 	free_textures(game);
 	close(fd);
 	printf("Error! RGB is invalid\n");
@@ -29,6 +28,7 @@ t_game	parse_rgb(char *line, t_game game, int fd)
 	int	comma_count;
 	int	values[3];
 
+	(void)comma_count;
 	i = 0;
 	if (commas_couter(line, game, fd) != 2)
 		invalid_rgb(line, game, fd);

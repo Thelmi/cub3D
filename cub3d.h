@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 09:43:15 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/26 11:35:16 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <math.h>
 # include "./get_next_line/get_next_line.h"
+# include <limits.h>
 
 typedef struct s_game
 {
@@ -69,4 +70,6 @@ void		valid_all_ones(char *read, t_game game, int fd);
 void		free_and_exit(char **str, int fd, t_game game, char *read);
 char		*ft_substr(char *s, unsigned int start, size_t len);
 char		**ft_split(char *s, char c);
+void		free_map(t_game game);
+int			is_enclosed(t_game game);
 #endif

@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:06:49 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/29 01:13:46 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:09:49 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ void	not_cub_extention(char *str)
 
 t_game	parsing(t_game game, int ac, char **av)
 {
-	int		i;
 	int		fd;
 
 	fd = 0;
-	i = 0;
 	if (ac != 2)
 	{
 		printf("Error! only two arguements are allowed\n");

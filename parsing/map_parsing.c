@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:23:17 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 09:43:37 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:11:40 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	valid_all_ones(char *read, t_game game, int fd)
 	int	i;
 
 	i = 0;
-	while (read[i] == ' ' || read[i] == '\t')
+	while (read[i] == ' ')
 		i++;
 	while (read[i])
 	{
-		if (read[i] != '1' && read[i] != '\n')
+		if (read[i] != '1' && read[i] != '\n' && read[i] != ' ')
 		{
 			free(read);
 			free_textures(game);
@@ -91,6 +91,7 @@ t_game	map_parsing(t_game game, int fd)
 	char	*read_next;
 	char	**str;
 
+	(void)read_next;
 	read = get_next_line(fd);
 	read = nl_escaper(read, game, fd);
 	valid_all_ones(read, game, fd);
@@ -98,7 +99,15 @@ t_game	map_parsing(t_game game, int fd)
 	str = ft_split(read, '\n');
 	game = locate_check_players(str, game, fd, read);
 	game.map = str;
-	game.copy = ft_split(read, '\n');
+	if (!is_enclosed(game))
+	{
+		free_textures(game);
+		free_map(game);
+		free(read);
+		close (fd);
+		printf("Error! not surrounded by walls\n");
+		exit(1);
+	}
 	free(read);
 	return (game);
 }

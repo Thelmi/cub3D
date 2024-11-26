@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:09 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/30 14:55:01 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/26 15:11:18 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_game	parse_ceil_rgb(char *line, t_game game, int fd)
 	int	comma_count;
 	int	values[3];
 
+	(void)comma_count;
 	i = 0;
 	if (commas_couter(line, game, fd) != 2)
 		invalid_rgb(line, game, fd);
