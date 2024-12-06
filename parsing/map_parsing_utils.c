@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 05:34:18 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/26 15:12:07 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/27 14:51:29 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	letters_checker(char *read_next, char *read, t_game game, int fd)
 		valid_all_ones(read_next, game, fd);
 	else
 	{
+		while (read_next[len] == ' ')
+			len--;
 		if (read_next[len] != '1')
 			letters_exit(read_next, read, game, fd);
 	}

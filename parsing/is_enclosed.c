@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 11:24:42 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/26 15:39:45 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/11/27 15:32:22 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,7 @@ int	is_enclosed(t_game game)
 		{
 			if ((game.map[i][j] == '0' || is_player(game.map[i][j]))
 				&& !check_neighbors(game, i, j))
-			{
-				printf("(%d , %d) %s\n", i, j, game.map[i]);
-				printf("	 %s\n", game.map[i + 1]);
 				return (0);
-			}
 			j++;
 		}
 		i++;
