@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/26 11:35:16 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/06 09:52:37 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_game
 	char	pl_view;
 	int		pl_x;
 	int		pl_y;
+	int		free_flag;
 }			t_game;
 
 t_game		locate_check_players(char **arr, t_game game, int fd, char *read);
@@ -59,9 +60,9 @@ int			ft_isdigit(int c);
 t_game		parse_rgb(char *line, t_game game, int fd);
 int			ft_atoi(char *str);
 int			invalid_rgb(char *line, t_game game, int fd);
-void		check_last_characters(char *line, t_game game, int fd, int i);
+void		check_last_characters(char *line, t_game *game, int fd, int i);
 t_game		assigning_fl_rgb(t_game game, int *values);
-int			parse_single_value(char *line, int *i, t_game game, int fd);
+int			parse_single_value(char *line, int *i, t_game *game, int fd);
 int			commas_couter(char *line, t_game game, int fd);
 int			is_valid_char(char c);
 t_game		assigning_ceil_color(char *line, t_game game, int fd);

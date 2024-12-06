@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:41:49 by thelmy            #+#    #+#             */
-/*   Updated: 2024/10/30 14:57:38 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/06 10:05:54 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	commas_couter(char *line, t_game game, int fd)
 	while (line[i])
 	{
 		if (!is_valid_char(line[i]))
-			invalid_rgb(line, game, fd);
+		{
+			comma_count = 0;
+			break ;
+		}
 		if (line[i] == ',')
 			comma_count++;
 		i++;
@@ -35,17 +38,17 @@ int	commas_couter(char *line, t_game game, int fd)
 	return (comma_count);
 }
 
-int	parse_single_value(char *line, int *i, t_game game, int fd)
+int	parse_single_value(char *line, int *i, t_game *game, int fd)
 {
 	int	value;
 
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	if (!ft_isdigit(line[*i]))
-		invalid_rgb(line, game, fd);
+		game->free_flag = 1;
 	value = atoi(&line[*i]);
 	if (value < 0 || value > 255)
-		invalid_rgb(line, game, fd);
+		game->free_flag = 1;
 	while (ft_isdigit(line[*i]))
 		(*i)++;
 	return (value);
@@ -61,10 +64,10 @@ t_game	assigning_fl_rgb(t_game game, int *values)
 	return (game);
 }
 
-void	check_last_characters(char *line, t_game game, int fd, int i)
+void	check_last_characters(char *line, t_game *game, int fd, int i)
 {
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	if (line[i])
-		invalid_rgb(line, game, fd);
+		game->free_flag = 1;
 }

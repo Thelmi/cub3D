@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:23:17 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/26 15:11:40 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/06 10:22:09 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,8 @@ static char	*nl_escaper(char *str, t_game game, int fd)
 t_game	map_parsing(t_game game, int fd)
 {
 	char	*read;
-	char	*read_next;
 	char	**str;
 
-	(void)read_next;
 	read = get_next_line(fd);
 	read = nl_escaper(read, game, fd);
 	valid_all_ones(read, game, fd);
