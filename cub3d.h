@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 09:52:37 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/10 09:03:46 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_game
 	int		pl_x;
 	int		pl_y;
 	int		free_flag;
+	int		newline;
 }			t_game;
 
 t_game		locate_check_players(char **arr, t_game game, int fd, char *read);

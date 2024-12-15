@@ -6,11 +6,20 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:04:48 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 10:39:30 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/14 11:54:15 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void	free_textures_exit(char *line, t_game game, int fd)
+{
+	free(line);
+	free_textures(game);
+	close(fd);
+	printf("Error! check the map textures again\n");
+	exit(1);
+}
 
 static int	is_whitespaces(char c)
 {
@@ -46,6 +55,22 @@ static char	*trimspaces(char *line, int fd)
 	return (str);
 }
 
+static char	*escape_whitespaces(char *line, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == '\n')
+	{
+		free(line);
+		line = NULL;
+		line = get_next_line(fd);
+	}
+	return (line);
+}
+
 t_game	map_file_parsing(t_game game, int fd)
 {
 	char	*line;
@@ -55,7 +80,14 @@ t_game	map_file_parsing(t_game game, int fd)
 	count = 0;
 	while (line)
 	{
+		if (line[0] == '\n' || line[0] == ' ')
+		{
+			line = escape_whitespaces(line, fd);
+			printf("line: %s\n", line);
+			continue ;
+		}
 		line = trimspaces(line, fd);
+		//printf("trimed line: %s\n", line);
 		if (line && line[0] != '\0' && ++count)
 			game = textures_parsing(line, game, fd);
 		free(line);
@@ -64,11 +96,7 @@ t_game	map_file_parsing(t_game game, int fd)
 		line = get_next_line(fd);
 	}
 	if (count != 6 || game.floor_hex == game.ceil_hex)
-	{
-		free(line);
-		free_textures(game);
-		(close(fd), printf("Error! check the map textures again\n"), exit(1));
-	}
+		free_textures_exit(line, game, fd);
 	game = map_parsing(game, fd);
 	return (game);
 }

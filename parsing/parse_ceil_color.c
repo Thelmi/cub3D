@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:09 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 10:05:39 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/10 09:40:08 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ t_game	assigning_ceil_color(char *line, t_game game, int fd)
 	if (game.cl_r == -1)
 	{
 		ptr = line;
-		line += i;
-		game = parse_ceil_rgb(line, game, fd);
+		ptr += i;
+		game = parse_ceil_rgb(ptr, game, fd);
 		if (game.free_flag)
-			invalid_rgb(ptr, game, fd);
+			invalid_rgb(line, game, fd);
 	}
 	else
 	{

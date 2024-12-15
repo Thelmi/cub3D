@@ -11,15 +11,15 @@ SRC = main.c parsing/parsing.c parsing/map_file_parsing.c parsing/textures_parsi
 OBJ := $(SRC:.c=.o)
 
 
-#CFLAGS = -Iminilibx -g3 -fsanitize=address
+#CFLAGS =  -Iminilibx -g3 -fsanitize=address
 
 all: $(NAME)
 
 %.o: %.c
-	cc -c $< -o $@
+	cc -g3 -c $< -o $@
 
 $(NAME): $(OBJ)
-	cc $(OBJ) -o $(NAME) $(CFLAGS)
+	cc -g3 $(OBJ) -o $(NAME) $(CFLAGS)
 
 re: fclean all
 

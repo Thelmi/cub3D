@@ -3,104 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: krazikho <krazikho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 16:56:13 by krazikho          #+#    #+#             */
-/*   Updated: 2024/02/11 18:52:25 by krazikho         ###   ########.fr       */
+/*   Created: 2024/07/07 23:22:14 by maakhan           #+#    #+#             */
+/*   Updated: 2024/12/14 12:24:10 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*update_buff(char *buff)
+static char	*ft_free(char *str, char *buff)
 {
-	int		i;
-	int		j;
-	char	*newbuff;
-
-	i = 0;
-	j = 0;
-	while (buff[i] != '\0' && buff[i] != '\n')
-		i++;
-	if (buff[i] == '\0')
-	{
-		free(buff);
-		return (NULL);
-	}
-	newbuff = malloc(sizeof(char) * (ft_strlen(buff) - i + 1));
-	if (!newbuff)
-		return (NULL);
-	i++;
-	while (buff[i])
-		newbuff[j++] = buff[i++];
-	newbuff[j] = '\0';
+	free(str);
 	free(buff);
-	return (newbuff);
+	return (NULL);
 }
 
-char	*get_linee(char *buff_joint)
+static char	*reader(int fd, char *buff, char *str, int *chars_read)
 {
-	int		pos;
-	char	*output;
+	char	*s;
 
-	pos = 0;
-	if (!buff_joint[pos])
-		return (NULL);
-	while (buff_joint[pos] && buff_joint[pos] != '\n')
-		pos++;
-	output = (char *)malloc(sizeof(char) * (pos + 2));
-	if (!output)
-		return (NULL);
-	pos = 0;
-	while (buff_joint[pos] && buff_joint[pos] != '\n')
+	while ((!ft_strchr(str, '\n')) && *chars_read > 0)
 	{
-		output[pos] = buff_joint[pos];
-		pos++;
-	}
-	output[pos] = buff_joint[pos];
-	pos++;
-	output[pos] = '\0';
-	return (output);
-}
-
-char	*find_line(int fd, char *buff_joint)
-{
-	char	*buff;
-	int		len;
-
-	buff = (char *)malloc(((size_t)BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (NULL);
-	len = 1;
-	while (!ft_strchr(buff_joint, '\n') && (len != 0))
-	{
-		len = read(fd, buff, BUFFER_SIZE);
-		if (len == -1)
+		*chars_read = read(fd, buff, BUFFER_SIZE);
+		if (*chars_read == -1)
 		{
 			free(buff);
-			free(buff_joint);
+			free(str);
 			return (NULL);
 		}
-		buff[len] = '\0';
-		buff_joint = ft_strjoin(buff_joint, buff);
+		if (chars_read == 0)
+		{
+			free(buff);
+			return (str);
+		}
+		buff[*chars_read] = '\0';
+		s = str;
+		str = ftt_strjoin(str, buff);
+		if (!str)
+			return (ft_free(s, buff));
+		free(s);
 	}
 	free(buff);
-	return (buff_joint);
+	return (str);
+}
+
+static char	*fetch_line(char *str)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	while (str[i] != '\n' && str[i] != '\0')
+		i++;
+	if (str[i] == '\n')
+		i++;
+	line = malloc(i + 1);
+	if (!line)
+		return (NULL);
+	line[i] = '\0';
+	i = 0;
+	while (str[i] != '\n' && str[i] != '\0')
+	{
+		line[i] = str[i];
+		i++;
+	}
+	if (str[i] == '\n')
+		line[i] = str[i];
+	return (line);
+}
+
+static char	*update(char *str)
+{
+	int		i;
+	char	*ptr;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
+		i++;
+	if (str[i] == '\0')
+	{
+		free(str);
+		return (NULL);
+	}
+	ptr = t_strdup(str + i);
+	free(str);
+	if (!ptr)
+		return (NULL);
+	return (ptr);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*output;
-	static char	*buffer;
+	char		*buff;
+	static char	*str;
+	char		*line;
+	int			chars_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
+	chars_read = 1;
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
-	buffer = find_line(fd, buffer);
-	if (!buffer)
-	{
+	buff = malloc(BUFFER_SIZE + 1);
+	if (!buff)
 		return (NULL);
-	}
-	output = get_linee(buffer);
-	buffer = update_buff(buffer);
-	return (output);
+	str = reader(fd, buff, str, &chars_read);
+	if (!str)
+		return (NULL);
+	line = fetch_line(str);
+	str = update(str);
+	return (line);
 }

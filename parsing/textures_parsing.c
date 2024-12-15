@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 03:41:23 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 13:42:20 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/14 10:36:11 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 void	free_textures(t_game game)
 {
 	if (game.no)
+	{
 		free(game.no);
+		game.no = NULL;
+	}
 	if (game.so)
+	{
 		free(game.so);
+		game.so = NULL;
+	}
 	if (game.we)
+	{
 		free(game.we);
+		game.we = NULL;
+	}
 	if (game.ea)
+	{
 		free(game.ea);
+		game.ea = NULL;
+	}
 }
 
 static void	assigning_texture(char *line, char **texture, int fd, t_game game)

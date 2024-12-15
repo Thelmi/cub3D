@@ -6,15 +6,17 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:23:17 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 10:22:09 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/08 14:07:25 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	empty_map(char *str, char *s, t_game game, int fd)
+t_game	newline_handler(char *str, char *s, t_game game, int fd)
 {
-	if (!str || str[0] == '\n')
+	if (!str || (str[0] == '\n' && game.newline == 0))
+		game.newline = 1;
+	else if (str[0] != '\n' && game.newline == 1)
 	{
 		printf("new line in the middle of the map\n");
 		if (str)
@@ -25,6 +27,7 @@ void	empty_map(char *str, char *s, t_game game, int fd)
 		close(fd);
 		exit(1);
 	}
+	return (game);
 }
 
 static char	*read_map_free(char *read, t_game game, int fd)
@@ -37,7 +40,7 @@ static char	*read_map_free(char *read, t_game game, int fd)
 		read_next = get_next_line(fd);
 		if (read_next == NULL)
 			break ;
-		empty_map(read_next, read, game, fd);
+		game = newline_handler(read_next, read, game, fd);
 		letters_checker(read_next, read, game, fd);
 		read = t_strjoin(read, read_next);
 		free (read_next);
@@ -81,6 +84,15 @@ static char	*nl_escaper(char *str, t_game game, int fd)
 	{
 		free(str);
 		str = get_next_line(fd);
+		if (!str)
+		{
+			if (str)
+				free(str);
+			free_textures(game);
+			close(fd);
+			printf("where is the map\n");
+			exit(1);
+		}
 	}
 	return (str);
 }

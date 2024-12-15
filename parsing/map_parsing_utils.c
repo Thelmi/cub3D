@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 05:34:18 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/27 14:51:29 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/11 11:09:38 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 static void	letters_exit(char *read_next, char *read, t_game game, int fd)
 {
-	printf("Map is invalid (%s)\n", read_next);
-	if (read_next)
-		free(read_next);
-	if (read)
-		free(read);
-	free_textures(game);
-	close(fd);
-	exit(1);
+	if (!game.newline)
+	{
+		printf("Map is invalid (%s)\n", read_next);
+		if (read_next)
+			free(read_next);
+		if (read)
+			free(read);
+		free_textures(game);
+		close(fd);
+		exit(1);
+	}
 }
 
 static int	is_valid_map_char(char c)
@@ -52,7 +55,7 @@ void	letters_checker(char *read_next, char *read, t_game game, int fd)
 		letters_exit(read_next, read, game, fd);
 	if (!ft_strchr(read_next, '\n'))
 		valid_all_ones(read_next, game, fd);
-	else
+	else if (t_strlen(read_next) > 2)
 	{
 		while (read_next[len] == ' ')
 			len--;

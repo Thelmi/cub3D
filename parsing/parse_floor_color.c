@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 01:59:47 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 13:57:43 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/14 10:58:21 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ t_game	parse_rgb(char *line, t_game game, int fd)
 
 	i = 0;
 	if (commas_couter(line, game, fd) != 2)
+	{
 		game.free_flag = 1;
+		return (game);
+	}
 	j = 0;
 	while (j < 3)
 	{

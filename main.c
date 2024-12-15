@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:49:16 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 10:27:27 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/10 09:00:46 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	game_init(t_game *game)
 	game->pl_x = -1;
 	game->pl_y = -1;
 	game->free_flag = 0;
+	game->newline = 0;
 }
 
 int	main(int ac, char **av)
