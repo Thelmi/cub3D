@@ -1,0 +1,19 @@
++num in RGB
+missing component 
+
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+A // here...
+C 0, 200, 01
+F 220, 100,      0
+EA ./path_to_the_east_texture
+
+an A in between...
+
+maeen leaks & error
+
+ 
+ 
+  
+   

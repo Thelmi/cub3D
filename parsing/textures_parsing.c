@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 03:41:23 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/14 10:36:11 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/15 19:41:04 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	assigning_texture(char *line, char **texture, int fd, t_game game)
 	int	i;
 
 	i = 2;
-	while (line[i] == ' ' || line[i] == '\t')
+	while (line[i] == ' ')
 		i++;
 	if (*texture == NULL)
 	{
@@ -81,7 +81,7 @@ t_game	textures_parsing(char *line, t_game game, int fd)
 	{
 		free_textures(game);
 		free(line);
-		printf(" check the map textures again\n");
+		printf("check the map textures and the colors again\n");
 		exit(1);
 	}
 	return (game);

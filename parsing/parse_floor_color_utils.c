@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:41:49 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 10:05:54 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/15 18:45:39 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_valid_char(char c)
 {
-	return (ft_isdigit(c) || c == ',' || c == ' ' || c == '\t');
+	return (ft_isdigit(c) || c == ',' || c == ' ');
 }
 
 int	commas_couter(char *line, t_game game, int fd)
@@ -42,7 +42,7 @@ int	parse_single_value(char *line, int *i, t_game *game, int fd)
 {
 	int	value;
 
-	while (line[*i] == ' ' || line[*i] == '\t')
+	while (line[*i] == ' ')
 		(*i)++;
 	if (!ft_isdigit(line[*i]))
 		game->free_flag = 1;
@@ -66,7 +66,7 @@ t_game	assigning_fl_rgb(t_game game, int *values)
 
 void	check_last_characters(char *line, t_game *game, int fd, int i)
 {
-	while (line[i] == ' ' || line[i] == '\t')
+	while (line[i] == ' ')
 		i++;
 	if (line[i])
 		game->free_flag = 1;

@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:04:48 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/14 11:54:15 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/17 09:45:25 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static void	free_textures_exit(char *line, t_game game, int fd)
 
 static int	is_whitespaces(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\n');
 }
 
 static char	*trimspaces(char *line, int fd)
@@ -37,11 +36,11 @@ static char	*trimspaces(char *line, int fd)
 		return (NULL);
 	i = 0;
 	len = t_strlen(line) - 1;
-	while (len > 0 && is_whitespaces(line[len]))
+	while (len >= 0 && is_whitespaces(line[len]))
 		len--;
 	while (line[i] && is_whitespaces(line[i]))
 		i++;
-	if (!len)
+	if (len <= -1)
 		return (NULL);
 	str = malloc(sizeof(char) * ((len - i) + 2));
 	if (!str)
@@ -71,32 +70,39 @@ static char	*escape_whitespaces(char *line, int fd)
 	return (line);
 }
 
+static t_game	file_parsing(t_game game, char *line, int count, int fd)
+{
+	if (count != 6 || game.floor_hex == game.ceil_hex)
+		free_textures_exit(line, game, fd);
+	game = map_parsing(game, fd);
+	return (game);
+}
+
 t_game	map_file_parsing(t_game game, int fd)
 {
 	char	*line;
 	int		count;
+	int		i;
 
 	line = get_next_line(fd);
 	count = 0;
 	while (line)
 	{
-		if (line[0] == '\n' || line[0] == ' ')
+		i = 0;
+		while (line[i] == ' ')
+			i++;
+		if (line[i] == '\n')
 		{
 			line = escape_whitespaces(line, fd);
-			printf("line: %s\n", line);
 			continue ;
 		}
 		line = trimspaces(line, fd);
-		//printf("trimed line: %s\n", line);
 		if (line && line[0] != '\0' && ++count)
 			game = textures_parsing(line, game, fd);
-		free(line);
+		(free(line), line = NULL);
 		if (count == 6)
 			break ;
 		line = get_next_line(fd);
 	}
-	if (count != 6 || game.floor_hex == game.ceil_hex)
-		free_textures_exit(line, game, fd);
-	game = map_parsing(game, fd);
-	return (game);
+	return (file_parsing(game, line, count, fd));
 }

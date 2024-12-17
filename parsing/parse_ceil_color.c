@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:09 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/10 09:40:08 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/15 18:46:00 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_game	parse_ceil_rgb(char *line, t_game game, int fd)
 		values[j++] = parse_single_value(line, &i, &game, fd);
 		if (j < 3)
 		{
-			while (line[i] == ' ' || line[i] == '\t')
+			while (line[i] == ' ')
 				i++;
 			if (line[i] != ',')
 				game.free_flag = 1;
@@ -54,7 +54,7 @@ t_game	assigning_ceil_color(char *line, t_game game, int fd)
 	char	*ptr;
 
 	i = 1;
-	while (line[i] == ' ' || line[i] == '\t')
+	while (line[i] == ' ')
 		i++;
 	if (game.cl_r == -1)
 	{

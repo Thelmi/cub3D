@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/10 09:03:46 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/17 08:40:25 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ char		*ft_substr(char *s, unsigned int start, size_t len);
 char		**ft_split(char *s, char c);
 void		free_map(t_game game);
 int			is_enclosed(t_game game);
+void		letters_exit(char *read_next, char *read, t_game game, int fd);
+void		last_line_valid(char *read_next, char *read, t_game game, int fd);
 #endif
