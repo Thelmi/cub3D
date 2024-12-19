@@ -11,12 +11,13 @@ SRC = main.c parsing/parsing.c parsing/map_file_parsing.c parsing/textures_parsi
 OBJ := $(SRC:.c=.o)
 
 
+CFLAGS = -Wall -Werror -Wextra -g3
 #CFLAGS =  -Iminilibx -g3 -fsanitize=address
 
 all: $(NAME)
 
 %.o: %.c
-	cc -g3 -c $< -o $@
+	cc $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
 	cc -g3 $(OBJ) -o $(NAME) $(CFLAGS)

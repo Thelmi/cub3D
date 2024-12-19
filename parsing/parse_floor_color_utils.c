@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 22:41:49 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/15 18:45:39 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/18 22:19:04 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	is_valid_char(char c)
 {
-	return (ft_isdigit(c) || c == ',' || c == ' ');
+	return (ft_isdigit(c) || c == ',' || c == ' ' || c == '+');
 }
 
-int	commas_couter(char *line, t_game game, int fd)
+int	commas_couter(char *line)
 {
 	int	comma_count;
 	int	i;
@@ -38,11 +38,11 @@ int	commas_couter(char *line, t_game game, int fd)
 	return (comma_count);
 }
 
-int	parse_single_value(char *line, int *i, t_game *game, int fd)
+int	parse_single_value(char *line, int *i, t_game *game)
 {
 	int	value;
 
-	while (line[*i] == ' ')
+	while (line[*i] == ' ' || (line[*i] == '+' && ft_isdigit(line[*i + 1])))
 		(*i)++;
 	if (!ft_isdigit(line[*i]))
 		game->free_flag = 1;
@@ -64,7 +64,7 @@ t_game	assigning_fl_rgb(t_game game, int *values)
 	return (game);
 }
 
-void	check_last_characters(char *line, t_game *game, int fd, int i)
+void	check_last_characters(char *line, t_game *game, int i)
 {
 	while (line[i] == ' ')
 		i++;

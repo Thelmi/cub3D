@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:58:09 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/15 18:46:00 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 16:10:45 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ static t_game	assigning_cl_rgb(t_game game, int *values)
 	return (game);
 }
 
-static t_game	parse_ceil_rgb(char *line, t_game game, int fd)
+static t_game	parse_ceil_rgb(char *line, t_game game)
 {
 	int	i;
 	int	j;
 	int	values[3];
 
 	i = 0;
-	if (commas_couter(line, game, fd) != 2)
+	if (commas_couter(line) != 2)
 		game.free_flag = 1;
 	j = 0;
 	while (j < 3)
 	{
-		values[j++] = parse_single_value(line, &i, &game, fd);
+		values[j++] = parse_single_value(line, &i, &game);
 		if (j < 3)
 		{
 			while (line[i] == ' ')
@@ -45,7 +45,7 @@ static t_game	parse_ceil_rgb(char *line, t_game game, int fd)
 		}
 	}
 	game = assigning_cl_rgb(game, values);
-	return (check_last_characters(line, &game, fd, i), game);
+	return (check_last_characters(line, &game, i), game);
 }
 
 t_game	assigning_ceil_color(char *line, t_game game, int fd)
@@ -60,7 +60,7 @@ t_game	assigning_ceil_color(char *line, t_game game, int fd)
 	{
 		ptr = line;
 		ptr += i;
-		game = parse_ceil_rgb(ptr, game, fd);
+		game = parse_ceil_rgb(ptr, game);
 		if (game.free_flag)
 			invalid_rgb(line, game, fd);
 	}
@@ -69,7 +69,7 @@ t_game	assigning_ceil_color(char *line, t_game game, int fd)
 		free(line);
 		free_textures(game);
 		close(fd);
-		printf("Error! texture direction is doubled\n");
+		printf("Error\n Either texture direction or color is doubled\n");
 		exit(1);
 	}
 	return (game);

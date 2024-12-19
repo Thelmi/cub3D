@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/17 08:40:25 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/18 22:19:59 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ char		*ft_strdup(char *s1);
 void		free_textures(t_game game);
 t_game		assigning_floor_color(char *line, t_game game, int fd);
 int			ft_isdigit(int c);
-t_game		parse_rgb(char *line, t_game game, int fd);
+t_game		parse_rgb(char *line, t_game game);
 int			ft_atoi(char *str);
 int			invalid_rgb(char *line, t_game game, int fd);
-void		check_last_characters(char *line, t_game *game, int fd, int i);
+void		check_last_characters(char *line, t_game *game, int i);
 t_game		assigning_fl_rgb(t_game game, int *values);
-int			parse_single_value(char *line, int *i, t_game *game, int fd);
-int			commas_couter(char *line, t_game game, int fd);
+int			parse_single_value(char *line, int *i, t_game *game);
+int			commas_couter(char *line);
 int			is_valid_char(char c);
 t_game		assigning_ceil_color(char *line, t_game game, int fd);
 void		letters_checker(char *read_next, char *read, t_game game, int fd);
@@ -76,4 +76,6 @@ void		free_map(t_game game);
 int			is_enclosed(t_game game);
 void		letters_exit(char *read_next, char *read, t_game game, int fd);
 void		last_line_valid(char *read_next, char *read, t_game game, int fd);
+int			is_whitespaces(char c);
+void		free_textures_exit(char *line, t_game game, int fd);
 #endif

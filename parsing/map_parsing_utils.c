@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 05:34:18 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/17 09:30:25 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 16:07:01 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	last_line_valid(char *read_next, char *read, t_game game, int fd)
 		i++;
 	while (read_next[i])
 	{
-		if (read_next[i] && read_next[i] != '1' && read_next[i] != '\n' && read_next[i] != ' ')
+		if (read_next[i] && read_next[i] != '1'
+			&& read_next[i] != '\n' && read_next[i] != ' ')
 		{
-			printf("read: (%s\n), read_next: (%s\n)", read, read_next);
-			printf("Map is invalid (%s)\n", read_next);
+			printf("Error\n Map is invalid (%s)\n", read_next);
 			if (read_next)
 				free(read_next);
 			if (read)
@@ -36,11 +36,12 @@ void	last_line_valid(char *read_next, char *read, t_game game, int fd)
 		i++;
 	}
 }
+
 void	letters_exit(char *read_next, char *read, t_game game, int fd)
 {
 	if (!game.newline)
 	{
-		printf("Map is invalid (%s)\n", read_next);
+		printf("Error\n Map is invalid (%s)\n", read_next);
 		if (read_next)
 			free(read_next);
 		if (read)
@@ -55,15 +56,6 @@ static int	is_valid_map_char(char c)
 {
 	return (c == ' ' || c == '0' || c == '1'
 		|| c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == '\n');
-}
-
-static int	player_check(char c)
-{
-	static int	count;
-
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		count++;
-	return (count);
 }
 
 void	letters_checker(char *read_next, char *read, t_game game, int fd)

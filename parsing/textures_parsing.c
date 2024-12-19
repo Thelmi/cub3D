@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 03:41:23 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/15 19:41:04 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 16:13:08 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	assigning_texture(char *line, char **texture, int fd, t_game game)
 		if (*texture == NULL)
 		{
 			free(line);
-			(close(fd), printf("Error! Memory allocation failed\n"), exit(1));
+			(close(fd), printf("Error\n Memory allocation failed\n"), exit(1));
 		}
 	}
 	else
@@ -58,7 +58,7 @@ static void	assigning_texture(char *line, char **texture, int fd, t_game game)
 		free(line);
 		free_textures(game);
 		close(fd);
-		printf("Error! texture direction is doubled\n");
+		printf("Error\n texture direction is doubled\n");
 		exit(1);
 	}
 }
@@ -81,7 +81,7 @@ t_game	textures_parsing(char *line, t_game game, int fd)
 	{
 		free_textures(game);
 		free(line);
-		printf("check the map textures and the colors again\n");
+		printf("Error\n check the map textures and the colors again\n");
 		exit(1);
 	}
 	return (game);

@@ -6,25 +6,11 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:04:48 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/17 09:45:25 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/18 22:08:32 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-static void	free_textures_exit(char *line, t_game game, int fd)
-{
-	free(line);
-	free_textures(game);
-	close(fd);
-	printf("Error! check the map textures again\n");
-	exit(1);
-}
-
-static int	is_whitespaces(char c)
-{
-	return (c == ' ' || c == '\n');
-}
 
 static char	*trimspaces(char *line, int fd)
 {
@@ -78,6 +64,14 @@ static t_game	file_parsing(t_game game, char *line, int count, int fd)
 	return (game);
 }
 
+static t_game	if_textures_parsing(char *line, int *count, t_game game, int fd)
+{
+	if (line && line[0] != '\0' && ++(*count))
+		game = textures_parsing(line, game, fd);
+	(free(line), line = NULL);
+	return (game);
+}
+
 t_game	map_file_parsing(t_game game, int fd)
 {
 	char	*line;
@@ -96,10 +90,10 @@ t_game	map_file_parsing(t_game game, int fd)
 			line = escape_whitespaces(line, fd);
 			continue ;
 		}
+		if (line[i] == '\0')
+			break ;
 		line = trimspaces(line, fd);
-		if (line && line[0] != '\0' && ++count)
-			game = textures_parsing(line, game, fd);
-		(free(line), line = NULL);
+		game = if_textures_parsing(line, &count, game, fd);
 		if (count == 6)
 			break ;
 		line = get_next_line(fd);

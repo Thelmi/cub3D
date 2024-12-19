@@ -6,11 +6,25 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:06:49 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/26 15:09:49 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 16:12:22 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	free_textures_exit(char *line, t_game game, int fd)
+{
+	free(line);
+	free_textures(game);
+	close(fd);
+	printf("Error\n check the map textures again\n");
+	exit(1);
+}
+
+int	is_whitespaces(char c)
+{
+	return (c == ' ' || c == '\n');
+}
 
 static int	is_cub_extention(char *haystack, char *needle)
 {
@@ -36,7 +50,7 @@ void	not_cub_extention(char *str)
 {
 	if (!(is_cub_extention(str, ".cub") && t_strlen(str) > 4))
 	{
-		printf("Error! the file should have a .cub extention\n");
+		printf("Error\n the file should have a .cub extention\n");
 		exit (1);
 	}
 }
@@ -48,7 +62,7 @@ t_game	parsing(t_game game, int ac, char **av)
 	fd = 0;
 	if (ac != 2)
 	{
-		printf("Error! only two arguements are allowed\n");
+		printf("Error\n only two arguements are allowed\n");
 		exit(1);
 	}
 	if (is_cub_extention(av[1], ".cub") && t_strlen(av[1]) > 4)

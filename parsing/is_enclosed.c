@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 11:24:42 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/27 15:32:22 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 16:15:18 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	is_player(char c)
 
 int	check_neighbors(t_game game, int y, int x)
 {
-	if (t_strlen(game.map[y + 1]) <= x || t_strlen(game.map[y - 1]) <= x)
+	if (t_strlen(game.map[y + 1]) <= (size_t)x
+		|| t_strlen(game.map[y - 1]) <= (size_t) x)
 		return (0);
 	if (game.map[y + 1][x] == ' ' || game.map[y - 1][x] == ' ' ||
 		game.map[y][x + 1] == ' ' || game.map[y][x - 1] == ' ')

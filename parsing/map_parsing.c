@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:23:17 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/16 11:05:38 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 16:14:34 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_game	newline_handler(char *str, char *s, t_game game, int fd)
 		game.newline = 1;
 	else if (str[0] != '\n' && game.newline == 1)
 	{
-		printf("new line in the middle of the map\n");
+		printf("Error\n new line in the middle of the map\n");
 		if (str)
 			free(str);
 		if (s)
@@ -62,7 +62,7 @@ void	valid_all_ones(char *read, t_game game, int fd)
 			free(read);
 			free_textures(game);
 			close(fd);
-			printf("border is not valid\n");
+			printf("Error\n border is not valid\n");
 			exit(1);
 		}
 		i++;
@@ -77,7 +77,7 @@ static char	*nl_escaper(char *str, t_game game, int fd)
 			free(str);
 		free_textures(game);
 		close(fd);
-		printf("where is the map\n");
+		printf("Error\n where is the map\n");
 		exit(1);
 	}
 	while (str[0] == '\n')
@@ -90,7 +90,7 @@ static char	*nl_escaper(char *str, t_game game, int fd)
 				free(str);
 			free_textures(game);
 			close(fd);
-			printf("where is the map\n");
+			printf("Error\n where is the map\n");
 			exit(1);
 		}
 	}
@@ -115,7 +115,7 @@ t_game	map_parsing(t_game game, int fd)
 		free_map(game);
 		free(read);
 		close (fd);
-		printf("Error! not surrounded by walls\n");
+		printf("Error\n not surrounded by walls\n");
 		exit(1);
 	}
 	free(read);

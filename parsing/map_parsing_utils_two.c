@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 08:42:57 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/06 10:28:48 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 16:04:42 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_and_exit(char **str, int fd, t_game game, char *read)
 	int	i;
 
 	i = 0;
-	printf("Error, You must have one player\n");
+	printf("Error\n, You must have one player\n");
 	if (str)
 	{
 		while (str[i])
