@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:49:16 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/17 12:23:27 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/21 23:32:36 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,15 @@ int	main(int ac, char **av)
 
 	game_init(&game);
 	game = parsing(game, ac, av);
-	free_textures(game);
-	free_map(game);
+	//free_textures(game);
+	//free_map(game);
+	game.mlx_connection = mlx_init();
+	game.mlx_window = mlx_new_window(game.mlx_connection, WIDTH,
+			HEIGHT, "Kub3T");
+	init_player_view_and_position(&game);
+	draw(&game); 
+	mlx_key_hook(game.mlx_window, key_hook, &game);
+	mlx_hook(game.mlx_window, 17, 0, (void *)exit, 0);
+	mlx_loop(game.mlx_connection);
 	return (0);
 }

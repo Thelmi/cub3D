@@ -6,7 +6,7 @@
 /*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:51:59 by thelmy            #+#    #+#             */
-/*   Updated: 2024/12/18 22:19:59 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/21 22:51:23 by thelmy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,55 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include "./get_next_line/get_next_line.h"
 # include <limits.h>
+# include "./get_next_line/get_next_line.h"
+
+# define WIDTH 1500
+# define HEIGHT 1000
+# define FOV_ANGLE (M_PI/3) 
+# define TILE_SIZE 30 
+
+typedef struct s_wall
+{
+	int start_y;
+	int end_y;
+	int wallslice_height;
+	double texture_step;
+	double tex_x;
+	double tex_y;
+	int	step_x;
+	int	step_y;
+	int	a;
+	int	b;
+} t_wall;
+
+typedef struct s_ray
+{
+	double 	ray_angle;
+	double 	ray_length;
+	double 	ray_init_x;
+	double 	ray_init_y;
+	double 	c_per_unit_x;
+	double 	c_per_unit_y;
+	double 	first_hor_int_c;
+	double 	first_ver_int_c;
+    int 	hit_orientation;
+}t_ray;
+
+typedef struct s_img
+{
+	void *img;
+	char *adrs;
+	int	 bitsperpixel;
+	int	 linelen;
+	int	 endian;
+}t_img;
 
 typedef struct s_game
 {
+	void	*mlx_connection;
+	void	*mlx_window;
+	t_img	img;
 	char	**map;
 	char	**copy;
 	char	*no;
@@ -39,8 +83,17 @@ typedef struct s_game
 	int		cl_g;
 	int		cl_b;
 	char	pl_view;
+	double	pl_view_ang;
 	int		pl_x;
 	int		pl_y;
+	int 	pl_x_tile;
+	int 	pl_y_tile;
+	t_ray	ray;
+	t_img 	north_texture;
+    t_img 	south_texture;
+    t_img 	east_texture;
+    t_img 	west_texture;
+	t_wall	wall;
 	int		free_flag;
 	int		newline;
 }			t_game;
@@ -78,4 +131,13 @@ void		letters_exit(char *read_next, char *read, t_game game, int fd);
 void		last_line_valid(char *read_next, char *read, t_game game, int fd);
 int			is_whitespaces(char c);
 void		free_textures_exit(char *line, t_game game, int fd);
+int			key_hook(int keycode, t_game *game);
+void 		draw(t_game *game);
+void		init_player_view_and_position(t_game *game);
+void		init_ray_values(t_game *game);
+void		init_walls(t_game *game);
+void		draw_walls(t_game *game);
+void		get_we_textures(t_game *game);
+void		get_ns_textures(t_game *game);
+void		draw_wall_slice(t_game *game, int x_screen);
 #endif
