@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_utils_two.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thelmy <thelmy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: krazikho <krazikho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 08:42:57 by thelmy            #+#    #+#             */
-/*   Updated: 2024/11/01 10:08:44 by thelmy           ###   ########.fr       */
+/*   Updated: 2024/12/19 20:40:11 by krazikho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int	is_pl_view(char c, t_game *game, int i, int j)
 	{
 		game->pl_x = j;
 		game->pl_y = i;
-		printf("%d\n", game->pl_y);
-		printf("%d\n", game->pl_x);
 	}
 	return (c == 'N' || c == 'W' || c == 'E' || c == 'S');
 }
